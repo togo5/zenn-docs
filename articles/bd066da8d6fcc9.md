@@ -1,14 +1,14 @@
 ---
-title: ".devcontainer/Dockerfile 内で npm install すると not found となる"
+title: ".devcontainer/Dockerfile で npm install して not found となったとき"
 emoji: "🔨"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["docker", "vscode"]
-published: false
+published: true
 ---
 
 # 問題
 
-以下のようなディレクトリ構成のときに Dockerfile 内で `RUN npm install` などと記述するとビルド時にエラーとなることがあります。
+以下のようなディレクトリ構成のときに Dockerfile で `RUN npm install` などと記述するとビルド時にエラーとなることがあります。
 
 ```shell
 npm ERR! enoent ENOENT: no such file or directory, open '/hoge/package.json'
