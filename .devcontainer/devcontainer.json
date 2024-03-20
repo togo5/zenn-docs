@@ -2,6 +2,7 @@
 {
 	"name": "Zenn CLI",
 	"build": {
+		"context": "..",
 		"dockerfile": "Dockerfile"
 	},
   "remoteUser": "node"
