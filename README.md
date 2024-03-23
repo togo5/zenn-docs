@@ -1,4 +1,4 @@
-# ZENN DOCS
+# Zenn Docs
 
 ZENN に投稿する記事のリポジトリとして扱う。更新の負担を高くしたくないので、 Issue までは作らずに直接 main ブランチに push していく運用とする。
 
