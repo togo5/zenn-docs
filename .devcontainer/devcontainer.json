@@ -1,9 +1,14 @@
 // See https://containers.dev/implementors/json_reference/ for configuration reference
 {
-	"name": "Zenn CLI",
-	"build": {
-		"context": "..",
-		"dockerfile": "Dockerfile"
-	},
-  "remoteUser": "node"
+  "name": "Zenn CLI",
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "node",
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode"]
+    }
+  }
 }
