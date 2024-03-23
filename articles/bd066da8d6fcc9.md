@@ -8,36 +8,20 @@ published: true
 
 # 問題
 
-以下のようなディレクトリ構成のときに Dockerfile で `RUN npm install` などと記述するとビルド時にエラーとなることがあります。
+`.devcontainer/Dockerfile` で `RUN npm install` と記述したところビルド時にエラーが発生しました。
 
 ```shell
 npm ERR! enoent ENOENT: no such file or directory, open '/hoge/package.json'
 ```
 
-```
-hoge
-├ .devcontainer
-│ ├ devcontainer.json
-│ └ Dockerfile
-├ src
-│ └ ...
-└ package.json
-```
+原因はビルドコンテキストがデフォルトの `.devcontainer/` であったため、上位のディレクトリの `package.json` が読み込めなかったためでした。
 
 
+# 解決策
 
-# 原因
+`.devcontainer/devcontainer.json` に context の設定を加えるとエラーなくビルドされるようになりました。
 
-デフォルトではビルドコンテキストが `Dockerfile` と同じディレクトリとなります。
-そのため、上位のディレクトリにあるファイルを読み込むことができません。
-
-# 解決
-
-## VS Code
-
-`.devcontainer.json` に context の設定を加えます。
-
-```json:.devcontainer.json
+```json:.devcontainer/devcontainer.json
 {
   "build": {
     "context": "..",
@@ -46,17 +30,8 @@ hoge
 }
 ```
 
-## CLI
-
-`-f` オプションを使用して `Dockerfile` と context のパスを指定します。
-
-```shell
-docker build -f .devcontainer/Dockerfile .
-```
-
 # 参考
 
 https://docs.docker.com/build/building/context/
 
-https://matsuand.github.io/docs.docker.jp.onthefly/develop/develop-images/dockerfile_best-practices/#%E3%83%93%E3%83%AB%E3%83%89%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E7%90%86%E8%A7%A3
-
+https://containers.dev/implementors/json_reference/
